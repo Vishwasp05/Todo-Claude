@@ -8,17 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+  
+  @StateObject var vm = TodoViewModel()
+  @State private var text: String = ""
+  var body: some View {
+    VStack {
+      NavigationStack{
+        List{
+          ForEach(vm.todos) { todo in
+            Text(todo.title)}
+                    
         }
-        .padding()
+        
+        
+        TextField("", text: $text).textFieldStyle(.roundedBorder)
+        Button("Add Todo") {
+          vm.addToTodoList(text)
+                  }
+        
+        .navigationTitle("Todo List ")
+      }
+      .environmentObject(vm)
+      
+      
+      
+      
+      
+      
+      
+      
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+
+class TodoViewModel: ObservableObject {
+  @Published var todos: [Todo] = []
+  
+  func addToTodoList(_ title: String) {
+    let todo = Todo(title: title)
+    todos.append(todo)
+  }
+}
